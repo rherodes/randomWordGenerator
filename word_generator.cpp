@@ -1,9 +1,14 @@
+//Richard Herodes
+//June 2020
+//Random Word Generator
+
 #include<iostream>
 #include<fstream>
 #include<string>
 #include<cstdlib>
 using namespace std;
 
+//Return the letter associated with the given number
 string whatLetter(int numLetter){
     string corrLetter;
     if(numLetter==0){
@@ -62,29 +67,45 @@ string whatLetter(int numLetter){
     return corrLetter;
 }
 
+//Check if the given string is a word
 void checkWord(string word){
     string check;
+    
+    //Open dictionary
     ifstream ifs;
     ifs.open("wordList.txt");
+    
+    //Check until word found or EOF
     while(ifs>>check){
         if(word==check){
             cout<<word<<endl;
             break;
         }
     }
+    
+    //Close file
     ifs.close();
     return;
 }
 
 int main(){
     string letter1, letter2, letter3, letter4, word;
+    
+    //Run forever
     while(1){
+        
+        //Generate 4 random letters
         letter1=whatLetter(rand() % 25);
         letter2=whatLetter(rand() % 25);
         letter3=whatLetter(rand() % 25);
         letter4=whatLetter(rand() % 25);
 
+        //Append letters together to create a 'word'
         word = letter1 + letter2 + letter3 + letter4;
+        
+        //Call function to see if the word is real
         checkWord(word);
     }
+    
+    return 0;
 }
